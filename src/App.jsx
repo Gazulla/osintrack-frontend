@@ -8,16 +8,19 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import useLogin from "./hooks/useLogin";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const { user, handleLogin, handleLogout } = useLogin();
+  const handleDarkMode = (bool) => {
+    setDarkMode(bool);
+  };
+  const { user, handleLogout } = useLogin();
   return (
-    <main className={darkMode ? "dark" : ""}>
+    <main className={`${darkMode ? "dark" : ""} text-foreground bg-background`}>
       <Router>
-        <Header setDarkMode={setDarkMode} user={user} handleLogin={handleLogin} handleLogout={handleLogout} />
+        <Header user={user} handleLogout={handleLogout} darkMode={darkMode} handleDarkMode={handleDarkMode} />
         <Routes>
           <Route element={<ProtectedRoute isAllowed={!!user} />}>
             <Route path="/" element={<Dashboard />} />
           </Route>
-          <Route path="login" element={<Login isLoggedIn={!!user} />} />
+          <Route path="login" element={<Login isLoggedIn={!!user} darkMode={darkMode} />} />
           <Route path="*" element={<div>404 - Resource not found</div>} />
         </Routes>
       </Router>

@@ -1,11 +1,24 @@
 import { useState } from "react";
-
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@nextui-org/react";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+  Image,
+  Avatar,
+  DropdownSection,
+} from "@nextui-org/react";
 import { Link } from "react-router-dom";
 
-export default function Header({ user, handleLogin, handleLogout }) {
+export default function Header({ user, handleLogout, darkMode, handleDarkMode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuItems = ["Dashboard", "My Settings", "Log Out"];
 
   if (!user) {
     return <></>;
@@ -19,13 +32,13 @@ export default function Header({ user, handleLogin, handleLogout }) {
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <p className="font-bold text-inherit">OSINTRACK</p>
+          <Image alt="OSINTRACK Logo" className="object-cover rounded-xl" src={`/images/osintrack${darkMode ? "_white" : ""}.svg`} width={150} />
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden sm:flex gap-8" justify="center">
         <NavbarBrand>
-          <p className="font-bold text-inherit">OSINTRACK</p>
+          <Image alt="OSINTRACK Logo" className="object-cover rounded-xl" src={`/images/osintrack${darkMode ? "_white" : ""}.svg`} width={150} />
         </NavbarBrand>
         <NavbarItem isActive>
           <Link to="/">Dashboard</Link>
@@ -33,28 +46,50 @@ export default function Header({ user, handleLogin, handleLogout }) {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem>
-          {" "}
-          {user ? (
-            <Button onClick={handleLogout} as={Link} color="warning" href="#">
-              Logout
-            </Button>
-          ) : (
-            <Button onClick={handleLogin} as={Link} color="primary" href="#">
-              Login
-            </Button>
-          )}
-        </NavbarItem>
+        <Dropdown>
+          <DropdownTrigger>
+            <Avatar as="button" isBordered color="primary" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+          </DropdownTrigger>
+          <DropdownMenu aria-label="User menu">
+            <DropdownSection title="Pedro Gazulla" showDivider>
+              {darkMode ? (
+                <DropdownItem onClick={() => handleDarkMode(false)}>
+                  <div className="flex gap-1">
+                    <Image alt="Light Mode" className="object-cover rounded-xl" src="/icons/sun.svg" width={20} />
+                    <span>Light mode</span>
+                  </div>
+                </DropdownItem>
+              ) : (
+                <DropdownItem onClick={() => handleDarkMode(true)}>
+                  <div className="flex gap-1">
+                    <Image alt="Dark Mode" className="object-cover rounded-xl" src="/icons/moon.svg" width={20} />
+                    <span>Dark mode</span>
+                  </div>
+                </DropdownItem>
+              )}
+
+              <DropdownItem>
+                <div className="flex gap-1">
+                  <Image alt="Settings" className="object-cover rounded-xl" src="/icons/config.svg" width={20} />
+                  <span>Settings</span>
+                </div>
+              </DropdownItem>
+            </DropdownSection>
+
+            <DropdownItem key="logout" color="danger" onClick={handleLogout}>
+              <div className="flex gap-1">
+                <Image alt="Log out" className="object-cover rounded-xl" src="/icons/logout.svg" width={20} />
+                <span>Log out</span>
+              </div>
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
       </NavbarContent>
 
       <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link className="w-full" href="#" size="lg">
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
+        <NavbarMenuItem>
+          <Link to="/">Dashboard</Link>
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   );
