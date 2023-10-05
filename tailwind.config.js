@@ -12,7 +12,11 @@ export default {
         light: {
           colors: {
             primary: {
-              DEFAULT: "#1a4aab",
+              DEFAULT: "#2d2af5",
+              foreground: "#ffffff",
+            },
+            danger: {
+              DEFAULT: "#bd1939",
               foreground: "#ffffff",
             },
             focus: "#2e55a3",
@@ -21,7 +25,11 @@ export default {
         dark: {
           colors: {
             primary: {
-              DEFAULT: "#1a4aab",
+              DEFAULT: "#2d2af5",
+              foreground: "#ffffff",
+            },
+            danger: {
+              DEFAULT: "#bd1939",
               foreground: "#ffffff",
             },
             focus: "#2e55a3",

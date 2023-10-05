@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input } from "@nextui-org/react";
-import { EyeFilledIcon } from "./assets/EyeFilledIcon";
-import { EyeSlashFilledIcon } from "./assets/EyeSlashFilledIcon";
+import { EyeFilledIcon } from "../../assets/svg/EyeFilledIcon";
+import { EyeSlashFilledIcon } from "../../assets/svg/EyeSlashFilledIcon";
 
 export default function PasswordInput({ id, name }) {
   const [isVisible, setIsVisible] = useState(false);
