@@ -77,9 +77,9 @@ export default function TelegramGroupsTable() {
 
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <h3 className="text-lg font-bold mb-2 mt-4">Telegram groups</h3>
-        <Button color="primary" variant="light">
+        <Button color="primary" variant="light" size="sm">
           <div className="flex gap-1 items-center font-semibold">
             <AddIcon width={18} />
             <span>ADD GROUP</span>

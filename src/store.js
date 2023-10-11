@@ -3,9 +3,12 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import { loginReducer } from "./reducers/authReducers";
+import { narrativeListReducer, narrativeDetailsReducer } from "./reducers/narrativeReducers";
 
 const reducer = combineReducers({
   login: loginReducer,
+  narrativeList: narrativeListReducer,
+  narrativeDetails: narrativeDetailsReducer,
 });
 
 const rootReducer = (state, action) => {

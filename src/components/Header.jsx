@@ -57,14 +57,14 @@ export default function Header({ user, handleLogout, darkMode, handleDarkMode })
           <DropdownMenu aria-label="User menu">
             <DropdownSection title="Pedro Gazulla" showDivider>
               {darkMode ? (
-                <DropdownItem onClick={() => handleDarkMode(false)}>
+                <DropdownItem textValue="Light mode" onClick={() => handleDarkMode(false)}>
                   <div className="flex gap-1">
                     <SunIcon width={20} />
                     <span>Light mode</span>
                   </div>
                 </DropdownItem>
               ) : (
-                <DropdownItem onClick={() => handleDarkMode(true)}>
+                <DropdownItem textValue="Dark mode" onClick={() => handleDarkMode(true)}>
                   <div className="flex gap-1">
                     <MoonIcon width={20} />
                     <span>Dark mode</span>
@@ -72,7 +72,7 @@ export default function Header({ user, handleLogout, darkMode, handleDarkMode })
                 </DropdownItem>
               )}
 
-              <DropdownItem>
+              <DropdownItem textValue="Settings">
                 <div className="flex gap-1">
                   <ConfigIcon width={20} />
                   <span>Settings</span>
@@ -80,7 +80,7 @@ export default function Header({ user, handleLogout, darkMode, handleDarkMode })
               </DropdownItem>
             </DropdownSection>
 
-            <DropdownItem key="logout" color="danger" onClick={handleLogout}>
+            <DropdownItem textValue="Log out" key="logout" color="danger" onClick={handleLogout}>
               <div className="flex gap-1">
                 <LogoutIcon width={20} />
                 <span>Log out</span>

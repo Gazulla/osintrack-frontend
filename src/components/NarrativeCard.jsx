@@ -2,17 +2,18 @@ import { Card, CardHeader, CardBody, Image } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 
 export default function NarrativeCard({ narrative }) {
+  const { _id, title, description, image } = narrative;
   return (
-    <Link to={`/narratives/${narrative.id}`}>
-      <Card className="py-3" isPressable>
+    <Card className="py-3" isPressable>
+      <Link to={`narratives/${_id}`}>
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-          <h4 className="font-bold text-large">{narrative.title}</h4>
-          <small className="text-default-500">{narrative.description}</small>
+          <h4 className="font-bold text-large">{title}</h4>
+          <small className="text-default-500">{description}</small>
         </CardHeader>
         <CardBody className="flex overflow-visible py-2">
-          <Image alt={narrative.title} className="object-cover rounded-xl" src={narrative.image} width={"100%"} />
+          <Image alt={title} className="object-cover rounded-xl aspect-video" src={image} width={"100%"} />
         </CardBody>
-      </Card>
-    </Link>
+      </Link>
+    </Card>
   );
 }

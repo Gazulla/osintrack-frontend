@@ -1,22 +1,33 @@
-import { Card, CardBody, CardHeader, Divider, Image, Tab, Tabs, Tooltip } from "@nextui-org/react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useParams } from "react-router-dom";
+import { Card, CardBody, CardHeader, Divider, Image, Tab, Tabs } from "@nextui-org/react";
 import TelegramGroupsTable from "../components/TelegramGroupsTable";
-import { ConfigIcon } from "../assets/svg/ConfigIcon";
+
+import NarrativeUpdate from "../components/NarrativeUpdate";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { narrativeDetails } from "../actions/narrativeActions";
 
 export default function Narrative() {
+  const { narrativeId } = useParams();
+  const { title, description, image } = useSelector((state) => state.narrativeDetails.narrative);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(narrativeDetails({ narrativeId }));
+  }, []);
+
   return (
     <Card className="m-3">
       <CardHeader className="flex gap-3">
-        <Image alt="Pro Russia" radius="sm" src="/images/russia.png" width={80} height={60} />
+        <Image alt={title} radius="sm" src={image} width={80} height={60} />
         <div className="flex flex-col">
           <h2 className="flex gap-2 text-xl font-bold items-center">
-            <span>Pro Russia</span>
-            <Tooltip content="Config narrative settings">
-              <span className="cursor-pointer">
-                <ConfigIcon width={18} />
-              </span>
-            </Tooltip>
+            <span>{title}</span>
+            <NarrativeUpdate />
           </h2>
-          <p className="text-md text-default-600">Russian narratives used in war</p>
+          <p className="text-md text-default-600">{description}</p>
         </div>
       </CardHeader>
       <Divider />
