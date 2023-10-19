@@ -92,7 +92,9 @@ export default function Header({ user, handleLogout, darkMode, handleDarkMode })
 
       <NavbarMenu>
         <NavbarMenuItem>
-          <Link to="/">Dashboard</Link>
+          <Link to="/" onClick={() => setIsMenuOpen(false)}>
+            Dashboard
+          </Link>
         </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>

@@ -1,31 +1,47 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { Card, CardBody, CardHeader, Divider, Image, Tab, Tabs } from "@nextui-org/react";
 import TelegramGroupsTable from "../components/TelegramGroupsTable";
 
 import NarrativeUpdate from "../components/NarrativeUpdate";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { narrativeDetails } from "../actions/narrativeActions";
+import Loading from "../components/Loading";
+import NarrativeDelete from "../components/NarrativeDelete";
 
 export default function Narrative() {
+  const [loadingPage, setLoadingPage] = useState(true);
   const { narrativeId } = useParams();
-  const { title, description, image } = useSelector((state) => state.narrativeDetails.narrative);
-
+  const { loading: loadingData, error, narrative } = useSelector((state) => state.narrativeDetails);
+  const { title, description, image } = narrative;
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(narrativeDetails({ narrativeId }));
+    setLoadingPage(false);
   }, []);
+
+  if (loadingPage || loadingData) {
+    return (
+      <div className="flex items-center w-full justify-center m-5">
+        <Loading color="primary" labelColor="primary" />
+      </div>
+    );
+  }
+  if (error) {
+    return <Navigate to={"/404"} replace />;
+  }
 
   return (
     <Card className="m-3">
       <CardHeader className="flex gap-3">
-        <Image alt={title} radius="sm" src={image} width={80} height={60} />
+        <Image alt={title} radius="sm" src={image} width={80} height={60} className="object-cover rounded-xl aspect-video" />
         <div className="flex flex-col">
           <h2 className="flex gap-2 text-xl font-bold items-center">
             <span>{title}</span>
-            <NarrativeUpdate />
+            <NarrativeUpdate narrative={narrative} />
+            <NarrativeDelete narrative={narrative} />
           </h2>
           <p className="text-md text-default-600">{description}</p>
         </div>

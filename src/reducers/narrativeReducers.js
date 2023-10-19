@@ -8,6 +8,12 @@ import {
   NARRATIVE_DETAILS_REQUEST,
   NARRATIVE_DETAILS_SUCCESS,
   NARRATIVE_DETAILS_FAIL,
+  NARRATIVE_UPDATE_REQUEST,
+  NARRATIVE_UPDATE_SUCCESS,
+  NARRATIVE_UPDATE_FAIL,
+  NARRATIVE_DELETE_REQUEST,
+  NARRATIVE_DELETE_SUCCESS,
+  NARRATIVE_DELETE_FAIL,
 } from "../constants/narrativeConstants";
 
 export const narrativeListReducer = (state = { list: [] }, action) => {
@@ -17,19 +23,32 @@ export const narrativeListReducer = (state = { list: [] }, action) => {
       return { ...state, loading: true };
 
     case NARRATIVE_LIST_SUCCESS:
-      return { ...state, loading: false, list: action.payload };
+      return { loading: false, list: action.payload };
 
     case NARRATIVE_LIST_FAIL:
       return { ...state, loading: false, error: action.payload };
 
-    /* NARRATIVE CREATION */
+    /* NARRATIVE CREATE */
     case NARRATIVE_CREATE_REQUEST:
       return { ...state, loading: true };
 
     case NARRATIVE_CREATE_SUCCESS:
-      return { ...state, loading: false, list: [...state.list, action.payload] };
+      return { loading: false, list: [...state.list, action.payload] };
 
     case NARRATIVE_CREATE_FAIL:
+      return { ...state, loading: false, error: action.payload };
+
+    /* NARRATIVE DELETE */
+    case NARRATIVE_DELETE_REQUEST:
+      return { ...state, loading: true };
+
+    case NARRATIVE_DELETE_SUCCESS: {
+      const deletedId = action.payload;
+      console.log(action.payload);
+      const filteredList = [...state.list.filter((n) => n._id !== deletedId)];
+      return { loading: false, list: filteredList };
+    }
+    case NARRATIVE_DELETE_FAIL:
       return { ...state, loading: false, error: action.payload };
 
     default:
@@ -41,13 +60,16 @@ export const narrativeDetailsReducer = (state = { narrative: { title: "", descip
   switch (action.type) {
     /* NARRATIVE DETAILS SET */
     case NARRATIVE_DETAILS_REQUEST:
-      return { loading: true };
+    case NARRATIVE_UPDATE_REQUEST:
+      return { ...state, loading: true };
 
     case NARRATIVE_DETAILS_SUCCESS:
+    case NARRATIVE_UPDATE_SUCCESS:
       return { loading: false, narrative: action.payload };
 
     case NARRATIVE_DETAILS_FAIL:
-      return { loading: false, error: action.payload };
+    case NARRATIVE_UPDATE_FAIL:
+      return { ...state, loading: false, error: action.payload };
 
     default:
       return state;

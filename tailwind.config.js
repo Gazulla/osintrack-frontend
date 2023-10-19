@@ -16,7 +16,7 @@ export default {
               foreground: "#ffffff",
             },
             danger: {
-              DEFAULT: "#bd1939",
+              DEFAULT: "#e04a4a",
               foreground: "#ffffff",
             },
             focus: "#2e55a3",
@@ -29,7 +29,7 @@ export default {
               foreground: "#ffffff",
             },
             danger: {
-              DEFAULT: "#bd1939",
+              DEFAULT: "#e04a4a",
               foreground: "#ffffff",
             },
             focus: "#2e55a3",

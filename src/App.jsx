@@ -7,7 +7,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import useLogin from "./hooks/useLogin";
 import { useState } from "react";
 import Narrative from "./pages/Narrative";
-
+import Page404 from "./pages/Page404";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
@@ -33,8 +35,10 @@ function App() {
             <Route path="narratives/:narrativeId" element={<Narrative />} />
           </Route>
           <Route path="login" element={<Login isLoggedIn={!!user} darkMode={darkMode} />} />
-          <Route path="*" element={<div>404 - Resource not found</div>} />
+          <Route path="404" element={<Page404 />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
+        <ToastContainer position="bottom-right" />
       </Router>
     </main>
   );
