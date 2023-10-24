@@ -10,6 +10,7 @@ import Narrative from "./pages/Narrative";
 import Page404 from "./pages/Page404";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Admin from "./pages/Admin";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
@@ -32,6 +33,10 @@ function App() {
         <Routes>
           <Route element={<ProtectedRoute isAllowed={!!user} />}>
             <Route path="/" element={<Dashboard />} />
+            <Route path="narratives/:narrativeId" element={<Narrative />} />
+          </Route>
+          <Route element={<ProtectedRoute isAllowed={!!user && user.isAdmin} />}>
+            <Route path="admin" element={<Admin />} />
             <Route path="narratives/:narrativeId" element={<Narrative />} />
           </Route>
           <Route path="login" element={<Login isLoggedIn={!!user} darkMode={darkMode} />} />

@@ -4,11 +4,13 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import { loginReducer } from "./reducers/authReducers";
 import { narrativeListReducer, narrativeDetailsReducer } from "./reducers/narrativeReducers";
+import { adminSettingsReducer } from "./reducers/adminReducers";
 
 const reducer = combineReducers({
   login: loginReducer,
   narrativeList: narrativeListReducer,
   narrativeDetails: narrativeDetailsReducer,
+  admin: adminSettingsReducer,
 });
 
 const rootReducer = (state, action) => {

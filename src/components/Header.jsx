@@ -72,12 +72,16 @@ export default function Header({ user, handleLogout, darkMode, handleDarkMode })
                 </DropdownItem>
               )}
 
-              <DropdownItem textValue="Settings">
-                <div className="flex gap-1">
-                  <ConfigIcon width={20} />
-                  <span>Settings</span>
-                </div>
-              </DropdownItem>
+              {user.isAdmin && (
+                <DropdownItem textValue="Settings">
+                  <Link to="/admin" onClick={() => setIsMenuOpen(false)}>
+                    <div className="flex gap-1">
+                      <ConfigIcon width={20} />
+                      <span>Admin</span>
+                    </div>
+                  </Link>
+                </DropdownItem>
+              )}
             </DropdownSection>
 
             <DropdownItem textValue="Log out" key="logout" color="danger" onClick={handleLogout}>

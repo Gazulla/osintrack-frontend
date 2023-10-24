@@ -76,7 +76,7 @@ export const narrativeCreate = (formData) => async (dispatch, getState) => {
       type: NARRATIVE_CREATE_FAIL,
       payload: apiError ? apiError : error.message,
     });
-    toast.error("Could not create the narrative");
+    toast.error("Could not create narrative");
   }
 };
 
@@ -102,7 +102,7 @@ export const narrativeUpdate =
         type: NARRATIVE_UPDATE_FAIL,
         payload: apiError ? apiError : error.message,
       });
-      toast.error("Could not update the narrative");
+      toast.error("Could not update narrative");
     }
   };
 
@@ -126,6 +126,6 @@ export const narrativeDelete =
         type: NARRATIVE_DELETE_FAIL,
         payload: apiError ? apiError : error.message,
       });
-      toast.error("Could not delete the narrative");
+      toast.error("Could not delete narrative");
     }
   };
