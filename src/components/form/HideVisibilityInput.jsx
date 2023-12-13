@@ -3,16 +3,13 @@ import { Input } from "@nextui-org/react";
 import { EyeFilledIcon } from "../../assets/svg/EyeFilledIcon";
 import { EyeSlashFilledIcon } from "../../assets/svg/EyeSlashFilledIcon";
 
-export default function PasswordInput({ id, name }) {
+export default function HideVisibilityInput(props) {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   return (
     <Input
-      id={id}
-      name={name}
-      label="Password"
-      placeholder="Enter your password"
+      {...props}
       endContent={
         <button className="focus:outline-none" type="button" onClick={toggleVisibility}>
           {isVisible ? (

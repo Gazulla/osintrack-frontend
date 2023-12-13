@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useSelector } from "react-redux";
 import { adminSettingsGet } from "../actions/adminActions";
-import { Card, CardBody, CardHeader } from "@nextui-org/react";
-import TelegramKeysUpdate from "../components/TelegramKeysUpdate";
+
+import TelegramConnection from "../components/TelegramConnection";
 import LoadingWrapper from "../components/LoadingWrapper";
 
 export default function Admin() {
@@ -11,7 +11,7 @@ export default function Admin() {
   return (
     <LoadingWrapper loadingData={loadingData} dispatchFunction={adminSettingsGet}>
       <div className="grid sm:grid-cols-2 md:grid-cols-3">
-        <TelegramKeysUpdate settings={settings} />
+        <TelegramConnection settings={settings} />
       </div>
     </LoadingWrapper>
   );

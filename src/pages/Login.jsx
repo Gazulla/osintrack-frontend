@@ -1,6 +1,6 @@
 import { Button, Card, Image, Input } from "@nextui-org/react";
 import { Navigate } from "react-router-dom";
-import PasswordInput from "../components/form/PasswordsInput";
+import HideVisibilityInput from "../components/form/HideVisibilityInput";
 import useLogin from "../hooks/useLogin";
 import { OsintrackLogo } from "../assets/svg/OsintrackLogo";
 
@@ -24,7 +24,7 @@ export default function Login({ isLoggedIn }) {
 
         <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-3 w-full mt-5">
           <Input name="username" id="username" type="text" label="User" placeholder="Enter your username" />
-          <PasswordInput name="password" id="password" />
+          <HideVisibilityInput name="password" id="password" label={"Password"} placeholder={"Enter your password"} />
           <Button type="submit" color="primary">
             Login
           </Button>

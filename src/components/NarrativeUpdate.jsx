@@ -75,7 +75,7 @@ export default function NarrativeUpdate({ narrative }) {
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center" className="mt-10 mx-3">
         <ModalContent>
           <form onSubmit={(e) => handleSubmit(e)}>
-            <ModalHeader className="flex flex-col gap-1">Edit narrative settings</ModalHeader>
+            <ModalHeader className="flex flex-col gap-1 font-semibold">Edit narrative settings</ModalHeader>
             <ModalBody>
               <Input
                 autoFocus

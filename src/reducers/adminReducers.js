@@ -7,7 +7,7 @@ import {
   ADMIN_SETTINGS_UPDATE_SUCCESS,
 } from "../constants/adminConstants";
 
-export const adminSettingsReducer = (state = { settings: { telegramApiId: "", telegramApiHash: "" } }, action) => {
+export const adminSettingsReducer = (state = { settings: { telegramApiId: "", telegramApiHash: "", telegramPhone: "" } }, action) => {
   switch (action.type) {
     case ADMIN_SETTINGS_GET_REQUEST:
     case ADMIN_SETTINGS_UPDATE_REQUEST:

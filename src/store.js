@@ -5,12 +5,17 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { loginReducer } from "./reducers/authReducers";
 import { narrativeListReducer, narrativeDetailsReducer } from "./reducers/narrativeReducers";
 import { adminSettingsReducer } from "./reducers/adminReducers";
+import { telegramConnectionReducer, telegramGroupCheckReducer } from "./reducers/telegramReducers";
+import { profileReducer } from "./reducers/profileReducers";
 
 const reducer = combineReducers({
   login: loginReducer,
   narrativeList: narrativeListReducer,
   narrativeDetails: narrativeDetailsReducer,
   admin: adminSettingsReducer,
+  profile: profileReducer,
+  telegramGroupCheck: telegramGroupCheckReducer,
+  telegramConnection: telegramConnectionReducer,
 });
 
 const rootReducer = (state, action) => {

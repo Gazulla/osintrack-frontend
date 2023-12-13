@@ -1,8 +1,8 @@
 import { useCallback } from "react";
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Chip, Tooltip, Image, Button } from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Chip, Tooltip, Image } from "@nextui-org/react";
 import { EditIcon } from "../assets/svg/EditIcon";
 import { DeleteIcon } from "../assets/svg/DeleteIcon";
-import { AddIcon } from "../assets/svg/AddIcon";
+import TelegramGroupAdd from "./TelegramGroupAdd";
 
 const columns = [
   { name: "ID", uid: "id" },
@@ -36,7 +36,7 @@ const groups = [
   },
 ];
 
-export default function TelegramGroupsTable() {
+export default function TelegramGroupsTable({ narrativeId }) {
   const renderCell = useCallback((group, columnKey) => {
     const cellValue = group[columnKey];
 
@@ -79,12 +79,7 @@ export default function TelegramGroupsTable() {
     <>
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-bold mb-2 mt-4">Telegram groups</h3>
-        <Button color="primary" variant="light" size="sm">
-          <div className="flex gap-1 items-center font-semibold">
-            <AddIcon width={18} />
-            <span>ADD GROUP</span>
-          </div>
-        </Button>
+        <TelegramGroupAdd narrativeId={narrativeId} />
       </div>
 
       <Table removeWrapper aria-label="Example table with custom cells">

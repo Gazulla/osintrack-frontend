@@ -57,7 +57,7 @@ export default function NarrativeDelete({ narrative }) {
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center" className="mt-10 mx-3">
         <ModalContent>
           <form onSubmit={(e) => handleSubmit(e)}>
-            <ModalHeader className="flex flex-col gap-1">Delete narrative</ModalHeader>
+            <ModalHeader className="flex flex-col gap-1 font-semibold">Delete narrative</ModalHeader>
             <ModalBody>
               <p>
                 Write the title of the narrative <span className="font-bold">{`"${title}"`}</span> to permanently delete it

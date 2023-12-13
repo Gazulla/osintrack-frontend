@@ -1,4 +1,6 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Dropdown,
   DropdownTrigger,
@@ -13,6 +15,8 @@ import {
   NavbarMenuItem,
   Avatar,
   DropdownSection,
+  Button,
+  Tooltip,
 } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import { SunIcon } from "../assets/svg/SunIcon";
@@ -20,9 +24,23 @@ import { MoonIcon } from "../assets/svg/MoonIcon";
 import { ConfigIcon } from "../assets/svg/ConfigIcon";
 import { LogoutIcon } from "../assets/svg/LogoutIcon";
 import { OsintrackLogo } from "../assets/svg/OsintrackLogo";
+import { ProfileIcon } from "../assets/svg/ProfileIcon";
+import { profileGet } from "../actions/profileActions";
+import { telegramSessionCheck } from "../actions/telegramActions";
+import { TelegramIcon } from "../assets/svg/TelegramIcon";
 
 export default function Header({ user, handleLogout, darkMode, handleDarkMode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user: profileUser } = useSelector((state) => state.profile);
+  const { connected } = useSelector((state) => state.telegramConnection);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user) {
+      dispatch(profileGet());
+      dispatch(telegramSessionCheck());
+    }
+  }, [user]);
 
   if (!user) {
     return <></>;
@@ -50,12 +68,28 @@ export default function Header({ user, handleLogout, darkMode, handleDarkMode })
       </NavbarContent>
 
       <NavbarContent justify="end">
+        <Tooltip color={connected ? "success" : "danger"} content={`${connected ? `Connected to Telegram` : `Disconnected from Telegram`}`}>
+          <Button variant="faded" radius="full" color={connected ? "success" : "danger"} isIconOnly>
+            <Link to="/admin" onClick={() => setIsMenuOpen(false)}>
+              <TelegramIcon width={20} />
+            </Link>
+          </Button>
+        </Tooltip>
         <Dropdown>
           <DropdownTrigger>
-            <Avatar as="button" isBordered color="primary" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
+            <Avatar as="button" isBordered color="primary" src={profileUser.image} />
           </DropdownTrigger>
           <DropdownMenu aria-label="User menu">
-            <DropdownSection title="Pedro Gazulla" showDivider>
+            <DropdownSection title={profileUser.firstName} showDivider>
+              <DropdownItem textValue="Profile">
+                <Link to="/profile" onClick={() => setIsMenuOpen(false)}>
+                  <div className="flex gap-1">
+                    <ProfileIcon width={20} />
+                    <span>Profile</span>
+                  </div>
+                </Link>
+              </DropdownItem>
+
               {darkMode ? (
                 <DropdownItem textValue="Light mode" onClick={() => handleDarkMode(false)}>
                   <div className="flex gap-1">

@@ -22,9 +22,9 @@ export default function Narrative() {
     <LoadingWrapper dispatchFunction={narrativeDetails} loadingData={loadingData} dispatchParams={{ narrativeId }}>
       <Card className="m-3">
         <CardHeader className="flex gap-3">
-          <Image alt={title} radius="sm" src={image} width={80} height={60} className="object-cover rounded-xl aspect-video" />
+          <Image alt={title} radius="sm" src={image} width={90} className="object-cover rounded-xl aspect-video" />
           <div className="flex flex-col">
-            <h2 className="flex gap-2 text-xl font-bold items-center">
+            <h2 className="flex gap-2 text-xl font-semibold items-center">
               <span>{title}</span>
               <NarrativeUpdate narrative={narrative} />
               <NarrativeDelete narrative={narrative} />
@@ -39,7 +39,7 @@ export default function Narrative() {
               Report
             </Tab>
             <Tab key="Sources" title="Sources">
-              <TelegramGroupsTable />
+              <TelegramGroupsTable narrativeId={narrativeId} />
             </Tab>
           </Tabs>
         </CardBody>

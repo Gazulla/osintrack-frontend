@@ -70,7 +70,7 @@ export default function NarrativeCreate() {
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center" className="mt-10 mx-3">
         <ModalContent>
           <form onSubmit={(e) => handleSubmit(e)}>
-            <ModalHeader className="flex flex-col gap-1">Create new narrative</ModalHeader>
+            <ModalHeader className="flex flex-col gap-1 font-semibold">Create new narrative</ModalHeader>
             <ModalBody>
               <Input
                 autoFocus
